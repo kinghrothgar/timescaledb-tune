@@ -69,11 +69,22 @@ $ timescaledb-tune --conf-path=/path/to/postgresql.conf
 At the end, your `postgresql.conf` will be overwritten with the changes
 that you accepted from the prompts.
 
+#### Args and Environment variables
+
+Run `timescaledb-tune --help` for the full list of flags. Every flag can also
+be set through an environment variable. The variable name is the flag name
+upper-cased with a `TSTUNE_` prefix and hyphens replaced by underscores, e.g.
+`--max-bg-workers` becomes `TSTUNE_MAX_BG_WORKERS`. A flag passed on the
+command line always takes precedence over its environment variable.
+
+```bash
+$ TSTUNE_PROFILE=promscale TSTUNE_MEMORY=4GB TSTUNE_YES=true timescaledb-tune --quiet
+```
+
 #### Other invocations
 
 By default, timescaledb-tune provides recommendations for a typical timescaledb workload. The `--profile` flag can be
 used to tailor the recommendations for other workload types. Currently, the only non-default profile is "promscale".
-The `TSTUNE_PROFILE` environment variable can also be used to affect this behavior.
 
 ```bash
 $ timescaledb-tune --profile promscale

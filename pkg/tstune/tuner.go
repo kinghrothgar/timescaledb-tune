@@ -70,22 +70,24 @@ const (
 var filepathAbsFn = filepath.Abs
 
 // TunerFlags are the flags that control how a Tuner object behaves when it is run.
+// Each field may also be populated from the environment variable named in its
+// `env` tag; command-line flags take precedence over environment variables.
 type TunerFlags struct {
-	Memory       string // amount of memory to base recommendations on
-	NumCPUs      uint   // number of CPUs to base recommendations on
-	WALDiskSize  string // disk size of WAL to base recommendations on
-	PGVersion    string // major version of PostgreSQL to base recommendations on
-	PGConfig     string // path to pg_config binary
-	MaxConns     uint64 // max number of database connections
-	MaxBGWorkers int    // max number of background workers
-	ConfPath     string // path to the postgresql.conf file
-	DestPath     string // path to output file
-	YesAlways    bool   // always respond yes to prompts
-	Quiet        bool   // show only the bare necessities
-	UseColor     bool   // use color in output
-	DryRun       bool   // whether to actually persist changes to disk
-	Restore      bool   // whether to restore a backup
-	Profile      string // a specific "mode" to provide recommendations tailored to a special workload type, e.g. "promscale"
+	Memory       string `env:"TSTUNE_MEMORY"`         // amount of memory to base recommendations on
+	NumCPUs      uint   `env:"TSTUNE_CPUS"`           // number of CPUs to base recommendations on
+	WALDiskSize  string `env:"TSTUNE_WAL_DISK_SIZE"`  // disk size of WAL to base recommendations on
+	PGVersion    string `env:"TSTUNE_PG_VERSION"`     // major version of PostgreSQL to base recommendations on
+	PGConfig     string `env:"TSTUNE_PG_CONFIG"`      // path to pg_config binary
+	MaxConns     uint64 `env:"TSTUNE_MAX_CONNS"`      // max number of database connections
+	MaxBGWorkers int    `env:"TSTUNE_MAX_BG_WORKERS"` // max number of background workers
+	ConfPath     string `env:"TSTUNE_CONF_PATH"`      // path to the postgresql.conf file
+	DestPath     string `env:"TSTUNE_OUT_PATH"`       // path to output file
+	YesAlways    bool   `env:"TSTUNE_YES"`            // always respond yes to prompts
+	Quiet        bool   `env:"TSTUNE_QUIET"`          // show only the bare necessities
+	UseColor     bool   `env:"TSTUNE_COLOR"`          // use color in output
+	DryRun       bool   `env:"TSTUNE_DRY_RUN"`        // whether to actually persist changes to disk
+	Restore      bool   `env:"TSTUNE_RESTORE"`        // whether to restore a backup
+	Profile      string `env:"TSTUNE_PROFILE"`        // a specific "mode" to provide recommendations tailored to a special workload type, e.g. "promscale"
 }
 
 // Tuner represents the tuning program for TimescaleDB.

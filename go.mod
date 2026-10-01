@@ -3,6 +3,7 @@ module github.com/timescale/timescaledb-tune
 go 1.23
 
 require (
+	github.com/caarlos0/env/v11 v11.4.1
 	github.com/fatih/color v1.17.0
 	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58
 )
